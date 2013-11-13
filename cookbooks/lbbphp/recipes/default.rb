@@ -33,4 +33,30 @@
       action :discover
     end
 
+    php_net = php_pear_channel "pear.php.net" do
+      action :discover
+    end
+
+    php_unit = php_pear_channel "pear.phpunit.de" do
+      action :discover
+    end
+
+    php_pear "Net_URL2" do
+      channel php_net.channel_name
+      version "2.0.0"
+      action :install
+    end
+
+    php_pear "HTTP_Request2" do
+      channel php_net.channel_name
+      version "2.0.0"
+      action :install
+    end
+
+    php_pear "PHPUnit" do
+      channel php_unit.channel_name
+      action :install
+    end
+
+
 
