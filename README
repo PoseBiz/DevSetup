@@ -1,13 +1,17 @@
-# 1. Setup DevSetup repo
+# 1. Install Vagrant
+
+# http://docs.vagrantup.com/v2/installation/
+
+# 2. Setup DevSetup repo
 
 git clone https://github.com/PoseBiz/DevSetup.git
 
-# 2. Setup Submodules
+# 3. Setup Submodules
 
 git submodule init
 git submodule update
 
-# 3. Start Vagrant
+# 4. Start Vagrant
 
 cd DevSetup
 vagrant up
