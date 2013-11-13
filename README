@@ -10,7 +10,12 @@ vagrant init lucid32 http://files.vagrantup.com/lucid32.box
 
 git clone https://github.com/PoseBiz/DevSetup.git
 
-# 4. Start Vagrant
+# 4. Setup Submodules
+
+git submodule init
+git submodule update
+
+# 5. Start Vagrant
 
 cd DevSetup
 vagrant up
