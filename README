@@ -1,21 +1,13 @@
-# 1. Install Vagrant
-
-# http://docs.vagrantup.com/v2/installation/
-
-# 2. Install ubuntu VM
-
-vagrant init lucid32 http://files.vagrantup.com/lucid32.box
-
-# 3. Setup DevSetup repo
+# 1. Setup DevSetup repo
 
 git clone https://github.com/PoseBiz/DevSetup.git
 
-# 4. Setup Submodules
+# 2. Setup Submodules
 
 git submodule init
 git submodule update
 
-# 5. Start Vagrant
+# 3. Start Vagrant
 
 cd DevSetup
 vagrant up
