@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe "apache2::default"
+
     php_pear_channel "pear.phpunit.de" do
       action :discover
     end
@@ -41,6 +43,12 @@
       action :discover
     end
 
+    php_pear "PEAR" do
+      cur_version = `pear -V| head -1| awk -F': ' '{print $2}'`
+      action :upgrade
+      not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
+    end
+
     php_pear "Net_URL2" do
       channel php_net.channel_name
       version "2.0.0"
@@ -57,6 +65,25 @@
       channel php_unit.channel_name
       action :install
     end
+
+    web_app "shop.pose.dev" do
+      server_name "shop.pose.dev"
+      docroot "/vagrant/MoonBox/portal/web"
+      server_port "80"
+    end
+
+    web_app "admin.pose.dev" do
+      server_name "admin.pose.dev"
+      docroot "/vagrant/MoonBox/portal/web_admin"
+      server_port "80"
+    end
+
+    web_app "shop.pose.dev" do
+      server_name "admin.pose.dev"
+      docroot "/vagrant/MoonBox/portal/web"
+      server_port "443"
+    end
+
 
 
 
