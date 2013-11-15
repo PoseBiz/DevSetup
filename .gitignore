@@ -11,6 +11,7 @@
 
 ## Other
 .DS_Store
+.vagrant/
 
 ## Documentation cache and generated files:
 /.yardoc/
