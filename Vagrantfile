@@ -100,7 +100,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "openssl"
     chef.add_recipe "apache2"
     chef.add_recipe "apache2::mod_rewrite"
-    chef.add_recipe "apache2::mod_ssl"
+    chef.add_recipe "apache2::mod_ssl"    
     chef.add_recipe "mysql"
     chef.add_recipe "mysql::server"
     chef.add_recipe "memcached"
@@ -111,13 +111,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "php::module_mysql"
     chef.add_recipe "php::module_curl"
     chef.add_recipe "php::module_memcache"
+    chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "lbbphp"
     chef.log_level = :debug
 
     chef.json = { 
             "apache" => {
-                "default_site_enabled" => true,
-                "docroot_dir" => "/vagrant"
+                "default_site_enabled" => false
             },
             "mysql" => {
                "server_root_password" => "iloverandompasswordsbutthiswilldo",
