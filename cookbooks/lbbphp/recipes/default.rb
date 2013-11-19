@@ -67,21 +67,26 @@ include_recipe "apache2::default"
     end
 
     web_app "shop.pose.dev" do
+      server_admin "personal_email@pose.com"
       server_name "shop.pose.dev"
       docroot "/vagrant/MoonBox/portal/web"
+      docmainroot "/vagrant/MoonBox/portal"
       server_port "80"
+      servel_ssl_port "443"
+      server_prefix "shop.pose"
+      server_suffix ".dev"
+      ssl_crt "shop.pose.dev.crt"
+      ssl_key "shop.pose.dev.key"
     end
 
-    web_app "admin.pose.dev" do
+    web_app_admin "admin.pose.dev" do
+      server_admin "personal_email@pose.com"
       server_name "admin.pose.dev"
       docroot "/vagrant/MoonBox/portal/web_admin"
+      docmainroot "/vagrant/MoonBox/portal"
       server_port "80"
-    end
-
-    web_app "shop.pose.dev" do
-      server_name "admin.pose.dev"
-      docroot "/vagrant/MoonBox/portal/web"
-      server_port "443"
+      server_prefix "shop.pose"
+      server_suffix ".dev"
     end
 
 

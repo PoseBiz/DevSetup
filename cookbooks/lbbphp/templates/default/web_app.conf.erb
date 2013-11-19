@@ -1,46 +1,98 @@
-<VirtualHost *:<%= @params[:server_port] || node['apache']['listen_ports'].first %>>
-  ServerName <%= @params[:server_name] %>
+<VirtualHost *:<%= @params[:server_port] %>>
+  ServerAdmin <%= @params[:server_admin] %>
+  Servername <%= @params[:server_name] %>
   DocumentRoot <%= @params[:docroot] %>
-  RewriteEngine On
-
-  <Directory <%= @params[:docroot] %>>
-    Options <%= [@params[:directory_options] || "FollowSymLinks" ].flatten.join " " %>
-    AllowOverride <%= [@params[:allow_override] || "None" ].flatten.join " " %>
-    Order allow,deny
-    Allow from all
-  </Directory>
-
-  <Directory />
-    Options FollowSymLinks
+  <Directory  <%= @params[:docroot] %>>
+    Options FollowSymLinks ExecCGI
     AllowOverride None
+    Allow from All
+
+    # former symfony .htaccess
+    RewriteEngine On
+    # we check if the .html version is here (caching)
+    RewriteRule ^$ index.html [QSA]
+    RewriteRule ^([^.]+)$ $1.html [QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # no, so we redirect to our front web controller
+    RewriteRule ^(.*)$ index.php [QSA,L]
+  </Directory>
+ 
+  Alias /sf <%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf
+  <Directory "<%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf">
+
+    AllowOverride None
+    Allow from All  
+  </Directory>
+ 
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^<%= @params[:server_prefix] %>\<%= @params[:server_suffix] %>$
+  RewriteRule ^(.*)$ http://<%= @params[:server_name] %>/$1 [R=permanent,L]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteRule ^\/m(\/?|\/.+)$ /mobileweb$1 [NC]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteRule ^\/(frontend|mobileweb|api)(\/?|\/.*)$ /$1.php$2 [NC,L]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteRule ^\/(robots).txt$ /$1 [NC,L]
+  RewriteRule ^\/landing$ / [R=permanent,L]
+ 
+  ErrorLog /var/log/apache2/error.log
+  CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost *:<%= @params[:server_ssl_port] %>>
+  ServerAdmin <%= @params[:server_admin] %>
+  Servername <%= @params[:server_name] %>
+  DocumentRoot <%= @params[:docroot] %>
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks ExecCGI
+    AllowOverride None
+    Allow from All
+
+    # former symfony .htaccess
+    RewriteEngine On
+    # we check if the .html version is here (caching)
+    RewriteRule ^$ index.html [QSA]
+    RewriteRule ^([^.]+)$ $1.html [QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # no, so we redirect to our front web controller
+    RewriteRule ^(.*)$ index.php [QSA,L]
   </Directory>
 
-  <Location /server-status>
-    SetHandler server-status
-
-    Order Deny,Allow
-    Deny from all
-    Allow from 127.0.0.1
-  </Location>
-
-  LogLevel info
-  ErrorLog <%= node['apache']['log_dir'] %>/<%= @params[:name] %>-error.log
-  CustomLog <%= node['apache']['log_dir'] %>/<%= @params[:name] %>-access.log combined
-
-  <% if @params[:directory_index] -%>
-  DirectoryIndex <%= [@params[:directory_index]].flatten.join " " %>
-  <% end -%>
+  Alias /sf  <%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf
+  <Directory "<%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf">
+    AllowOverride None
+    Allow from All
+  </Directory>
 
   RewriteEngine On
-  RewriteLog <%= node['apache']['log_dir'] %>/<%= @application_name %>-rewrite.log
-  RewriteLogLevel 0
+  RewriteCond %{HTTP_HOST} !^<%= @params[:server_prefix] %>\<%= @params[:server_suffix] %>$
+  RewriteRule ^(.*)$ http://<%= @params[:server_name] %>/$1 [R=permanent,L]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteRule ^\/m(\/?|\/.+)$ /mobileweb$1 [NC]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteRule ^\/(frontend|mobileweb|api)(\/?|\/.*)$ /$1.php$2 [NC,L]
 
-  # Canonical host, <%= @params[:server_name] %>
-  RewriteCond %{HTTP_HOST}   !^<%= @params[:server_name] %> [NC]
-  RewriteCond %{HTTP_HOST}   !^$
-  RewriteRule ^/(.*)$        http://<%= @params[:server_name] %>/$1 [L,R=301]
+  ErrorLog /var/log/apache2/error.log
+  CustomLog /var/log/apache2/access.log combined
 
-  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
-  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
-  RewriteRule ^.*$ /system/maintenance.html [L]
+  SSLEngine on
+  SSLCertificateFile /etc/apache2/ssl/<%= @params[:ssl_crt] %>
+  SSLCertificateKeyFile /etc/apache2/ssl/<%= @params[:ssl_key] %>
+  # only include the next line for the production SSL server
+  # and include the intermediate certificate 
+  # provided by the CA in this file
+  #SSLCertificateChainFile /etc/apache2/ssl/server.intermediate.crt
+
+  <FilesMatch "\.(php)$">
+    SSLOptions +StdEnvVars
+  </FilesMatch>
+
+  BrowserMatch "MSIE [2-6]" \
+    nokeepalive ssl-unclean-shutdown \
+    downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
 </VirtualHost>
+</IfModule>
