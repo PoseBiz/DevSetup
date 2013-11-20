@@ -89,6 +89,18 @@ include_recipe "apache2::default"
       server_suffix ".dev"
     end
 
-
+    directory "/etc/apache2/ssl" do
+      action :create
+    end
+    
+    cookbook_file "shop.pose.dev.crt" do
+      path "/etc/apache2/ssl"
+      action :create_if_missing
+    end
+    
+    cookbook_file "shop.pose.dev.key" do
+      path "/etc/apache2/ssl"
+      action :create_if_missing
+    end
 
 

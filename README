@@ -11,7 +11,9 @@ git clone https://github.com/PoseBiz/DevSetup.git
 git submodule init
 git submodule update
 
-# 4. Start Vagrant
+# 4. Update server_admin email in the apache hosts file setup in lbbphp recipe 
+
+# 5. Start Vagrant
 
 cd DevSetup
 vagrant up

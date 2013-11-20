@@ -117,7 +117,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.json = { 
             "apache" => {
-                "default_site_enabled" => false
+                "default_site_enabled" => false,
+                "listen_ports" => ["80", "443"]
             },
             "mysql" => {
                "server_root_password" => "iloverandompasswordsbutthiswilldo",
@@ -125,6 +126,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                "server_debian_password" => "iloverandompasswordsbutthiswilldo"
             }
         }
+  end
+  
+  Vagrant.configure("2") do |config|
+  	config.vm.synced_folder "/MoonBox", "/vagrant/MoonBox"
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
