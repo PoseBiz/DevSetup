@@ -129,7 +129,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   Vagrant.configure("2") do |config|
-  	config.vm.synced_folder "~/MoonBox", "/vagrant/MoonBox"
+  	config.vm.synced_folder "~/Projects/LBB/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,

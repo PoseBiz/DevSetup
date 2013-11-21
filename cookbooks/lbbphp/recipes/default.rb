@@ -104,4 +104,14 @@ include_recipe "apache2::default"
       source "shop.pose.dev.key"
     end
 
+    directory "/vagrant/MoonBox/portal/log" do
+      action :create
+      mode 0777
+    end
+
+    directory "/vagrant/MoonBox/portal/cache" do
+      action :create
+      mode 0777
+    end
+
 
