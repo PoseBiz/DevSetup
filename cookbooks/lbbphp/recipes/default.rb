@@ -79,7 +79,8 @@ include_recipe "apache2::default"
       ssl_key "shop.pose.dev.key"
     end
 
-    web_app_admin "admin.pose.dev" do
+    web_app "admin.pose.dev" do
+      template "web_app_admin.conf.erb"
       server_admin "personal_email@pose.com"
       server_name "admin.pose.dev"
       docroot "/vagrant/MoonBox/portal/web_admin"
