@@ -22,6 +22,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
+  config.vm.synced_folder "~/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
+
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network :private_network, ip: "192.168.33.10"
@@ -126,10 +128,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                "server_debian_password" => "iloverandompasswordsbutthiswilldo"
             }
         }
-  end
-  
-  Vagrant.configure("2") do |config|
-  	config.vm.synced_folder "~/Projects/LBB/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
