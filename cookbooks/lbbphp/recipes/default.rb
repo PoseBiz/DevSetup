@@ -88,20 +88,20 @@ include_recipe "apache2::default"
       server_port "80"
       server_prefix "shop.pose"
       server_suffix ".dev"
+      ssl_crt "shop.pose.dev.crt"
+      ssl_key "shop.pose.dev.key"
     end
 
     directory "/etc/apache2/ssl" do
       action :create
     end
     
-    cookbook_file "shop.pose.dev.crt" do
-      path "/etc/apache2/ssl"
-      action :create_if_missing
+    cookbook_file "/etc/apache2/ssl/shop.pose.dev.crt" do
+      source "shop.pose.dev.crt"
     end
     
-    cookbook_file "shop.pose.dev.key" do
-      path "/etc/apache2/ssl"
-      action :create_if_missing
+    cookbook_file "/etc/apache2/ssl/shop.pose.dev.key" do
+      source "shop.pose.dev.key"
     end
 
 
