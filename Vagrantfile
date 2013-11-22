@@ -4,6 +4,8 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+LBB_PROJECT_ROOT = "/vagrant/MoonBox/portal"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -22,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "~/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "~/Projects/LBB/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -123,9 +125,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                 "listen_ports" => ["80", "443"]
             },
             "mysql" => {
-               "server_root_password" => "iloverandompasswordsbutthiswilldo",
-               "server_repl_password" => "iloverandompasswordsbutthiswilldo",
-               "server_debian_password" => "iloverandompasswordsbutthiswilldo"
+               "server_root_password" => "password",
+               "server_repl_password" => "password",
+               "server_debian_password" => "password"
             }
         }
   end
@@ -153,3 +155,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 end
+
+

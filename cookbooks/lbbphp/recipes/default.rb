@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+LBB_PROJECT_ROOT = "/vagrant/MoonBox/portal"
+
 include_recipe "apache2::default"
 
     php_pear_channel "pear.phpunit.de" do
@@ -69,8 +71,8 @@ include_recipe "apache2::default"
     web_app "shop.pose.dev" do
       server_admin "personal_email@pose.com"
       server_name "shop.pose.dev"
-      docroot "/vagrant/MoonBox/portal/web"
-      docmainroot "/vagrant/MoonBox/portal"
+      docroot "#{LBB_PROJECT_ROOT}/web"
+      docmainroot "#{LBB_PROJECT_ROOT}"
       server_port "80"
       servel_ssl_port "443"
       server_prefix "shop.pose"
@@ -83,8 +85,8 @@ include_recipe "apache2::default"
       template "web_app_admin.conf.erb"
       server_admin "personal_email@pose.com"
       server_name "admin.pose.dev"
-      docroot "/vagrant/MoonBox/portal/web_admin"
-      docmainroot "/vagrant/MoonBox/portal"
+      docroot "#{LBB_PROJECT_ROOT}/web_admin"
+      docmainroot "#{LBB_PROJECT_ROOT}"
       server_port "80"
       server_prefix "shop.pose"
       server_suffix ".dev"
@@ -104,14 +106,43 @@ include_recipe "apache2::default"
       source "shop.pose.dev.key"
     end
 
-    directory "/vagrant/MoonBox/portal/log" do
+    directory "#{LBB_PROJECT_ROOT}/log" do
       action :create
       mode 0777
     end
 
-    directory "/vagrant/MoonBox/portal/cache" do
+    directory "#{LBB_PROJECT_ROOT}/cache" do
       action :create
       mode 0777
     end
+
+    cookbook_file "#{LBB_PROJECT_ROOT}/config/databases.yml" do
+      source "databases.yml"
+    end
+
+    execute "initialize LBB dev database" do
+      command "mysql -u root --password=password -e 'DROP DATABASE IF EXISTS lbb; CREATE DATABASE IF NOT EXISTS lbb;'"
+    end
+
+    execute "initialize LBB test database" do
+      command "mysql -u root --password=password -e 'DROP DATABASE IF EXISTS lbb_test; CREATE DATABASE IF NOT EXISTS lbb_test'"
+    end
+
+    %w(model sql).each do |phase|
+      execute "./symfony doctrine:build-#{phase}" do
+        cwd LBB_PROJECT_ROOT
+      end
+    end
+
+    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/schema.sql"
+    execute "mysql -u root --password=password -D lbb -e 'ALTER TABLE user DROP FOREIGN KEY user_latest_bag_id_bag_id;'"
+    execute "mysql -u root --password=password -D lbb -e 'ALTER TABLE friend DROP FOREIGN KEY friend_followee_id_friend_follower_id;'"
+
+    %w(category charms quiz bots account_cancel_reason shipping_type tax_rates call_center_reasons rollover_reasons).each do |table|
+      execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/#{table}.sql"
+    end
+
+    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/shoes/bkup_2013_08_28_00_15_brand.sql"
+    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/shoes/bkup_2013_08_28_00_15_product.sql"
 
 
