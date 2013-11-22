@@ -1,0 +1,15 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn:    mysql:host=localhost;dbname=lbb
+      username: root
+      password: password
+
+readonly:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn:    mysql:host=localhost;dbname=lbb
+      username: root
+      password: password
