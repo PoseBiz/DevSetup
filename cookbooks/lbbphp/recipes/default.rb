@@ -134,15 +134,4 @@ include_recipe "apache2::default"
       end
     end
 
-    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/schema.sql"
-    execute "mysql -u root --password=password -D lbb -e 'ALTER TABLE user DROP FOREIGN KEY user_latest_bag_id_bag_id;'"
-    execute "mysql -u root --password=password -D lbb -e 'ALTER TABLE friend DROP FOREIGN KEY friend_followee_id_friend_follower_id;'"
-
-    %w(category charms quiz bots account_cancel_reason shipping_type tax_rates call_center_reasons rollover_reasons).each do |table|
-      execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/#{table}.sql"
-    end
-
-    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/shoes/bkup_2013_08_28_00_15_brand.sql"
-    execute "mysql -u root --password=password -D lbb < #{LBB_PROJECT_ROOT}/data/sql/shoes/bkup_2013_08_28_00_15_product.sql"
-
 
