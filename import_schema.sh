@@ -16,5 +16,5 @@ mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/tax_rates.
 mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/call_center_reasons.sql
 mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/rollover_reasons.sql
 
-mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/shoes/bkup_2013_08_28_00_15_brand.sql
-mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/shoes/bkup_2013_08_28_00_15_product.sql
+mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/shoes/bkup_*_brand.sql
+mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/shoes/bkup_*_product.sql

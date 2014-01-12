@@ -88,6 +88,7 @@ include_recipe "apache2::default"
       docroot "#{LBB_PROJECT_ROOT}/web_admin"
       docmainroot "#{LBB_PROJECT_ROOT}"
       server_port "80"
+      servel_ssl_port "443"
       server_prefix "shop.pose"
       server_suffix ".dev"
       ssl_crt "shop.pose.dev.crt"
@@ -105,6 +106,10 @@ include_recipe "apache2::default"
     cookbook_file "/etc/apache2/ssl/shop.pose.dev.key" do
       source "shop.pose.dev.key"
     end
+    
+    cookbook_file "/etc/apache2/mods-available/deflate.conf" do
+      source "deflate.conf"
+    en
 
     directory "#{LBB_PROJECT_ROOT}/log" do
       action :create
@@ -119,7 +124,7 @@ include_recipe "apache2::default"
     cookbook_file "#{LBB_PROJECT_ROOT}/config/databases.yml" do
       source "databases.yml"
     end
-
+    
     execute "initialize LBB dev database" do
       command "mysql -u root --password=password -e 'DROP DATABASE IF EXISTS lbb; CREATE DATABASE IF NOT EXISTS lbb;'"
     end

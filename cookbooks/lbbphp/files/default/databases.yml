@@ -2,7 +2,7 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:    mysql:host=localhost;dbname=lbb
+      dsn:    mysql:host=localhost;dbname=pose
       username: root
       password: password
 
@@ -10,6 +10,6 @@ readonly:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:    mysql:host=localhost;dbname=lbb
+      dsn:    mysql:host=localhost;dbname=pose
       username: root
       password: password
