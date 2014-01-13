@@ -115,7 +115,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "php::module_mysql"
     chef.add_recipe "php::module_curl"
     chef.add_recipe "php::module_memcache"
+    chef.add_recipe "php5_ppa"
     chef.add_recipe "apache2::mod_php5"
+    chef.add_recipe "git"
     chef.add_recipe "lbbphp"
     chef.log_level = :debug
 

@@ -16,3 +16,9 @@
 [submodule "cookbooks/cookbook-curl"]
 	path = cookbooks/cookbook-curl
 	url = https://github.com/retr0h/cookbook-curl.git
+[submodule "cookbooks/php"]
+	path = cookbooks/php
+	url = http://github.com/opscode-cookbooks/php
+[submodule "cookbooks/git"]
+	path = cookbooks/git
+	url = http://github.com/opscode-cookbooks/git

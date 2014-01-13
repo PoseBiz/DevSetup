@@ -109,7 +109,7 @@ include_recipe "apache2::default"
     
     cookbook_file "/etc/apache2/mods-available/deflate.conf" do
       source "deflate.conf"
-    en
+    end
 
     directory "#{LBB_PROJECT_ROOT}/log" do
       action :create
