@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-LBB_PROJECT_ROOT = "/vagrant/MoonBox/portal"
+LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
 include_recipe "apache2::default"
 
@@ -88,7 +88,7 @@ include_recipe "apache2::default"
       docroot "#{LBB_PROJECT_ROOT}/web_admin"
       docmainroot "#{LBB_PROJECT_ROOT}"
       server_port "80"
-      servel_ssl_port "443"
+      server_ssl_port "443"
       server_prefix "shop.pose"
       server_suffix ".dev"
       ssl_crt "shop.pose.dev.crt"

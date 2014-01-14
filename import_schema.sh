@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LBB_PROJECT_ROOT="/vagrant/MoonBox/portal"
+LBB_PROJECT_ROOT="/home/vagrant/MoonBox/portal"
 
 mysql -u root --password=password -D lbb < $LBB_PROJECT_ROOT/data/sql/schema.sql
 mysql -u root --password=password -D lbb -e 'ALTER TABLE user DROP FOREIGN KEY user_latest_bag_id_bag_id;'

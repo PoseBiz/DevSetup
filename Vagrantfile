@@ -4,7 +4,7 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-LBB_PROJECT_ROOT = "/vagrant/MoonBox/portal"
+LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -12,11 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "lucid32"
+  config.vm.box = "precise64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -24,7 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "~/git/MoonBox", "/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "~/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data' 
+  #, :mount_options => ['dmode=775', 'fmode=775']
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -109,15 +110,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "mysql::server"
     chef.add_recipe "memcached"
     chef.add_recipe "cookbook-curl"
-    chef.add_recipe "php"
-    chef.add_recipe "php::module_gd"
-    chef.add_recipe "php::module_apc"
-    chef.add_recipe "php::module_mysql"
-    chef.add_recipe "php::module_curl"
-    chef.add_recipe "php::module_memcache"
     chef.add_recipe "php5_ppa"
+    #chef.add_recipe "php"
+    #chef.add_recipe "php::module_gd"
+    #chef.add_recipe "php::module_apc"
+    #chef.add_recipe "php::module_mysql"
+    #chef.add_recipe "php::module_curl"
+    #chef.add_recipe "php::module_memcache"
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "git"
+    chef.add_recipe "vim"
     chef.add_recipe "lbbphp"
     chef.log_level = :debug
 
