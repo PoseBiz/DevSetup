@@ -22,15 +22,15 @@ execute "apt-get update" do
   command "apt-get -y update"
 end
 
-execute "apt-get install php" do
+execute "apt-get install php5" do
   command "apt-get -y install php5"
 end
 
-execute "apt-get install php" do
+execute "apt-get install php5-cgi" do
   command "apt-get -y install php5-cgi"
 end
 
-execute "apt-get install php" do
+execute "apt-get install php5-fpm" do
   command "apt-get -y install php5-fpm"
 end
 
@@ -38,15 +38,15 @@ execute "apt-get install php-memcache" do
   command "apt-get -y install php5-memcache"
 end
 
-execute "apt-get install php-memcache" do
+execute "apt-get install php-apc" do
   command "apt-get -y install php-apc"
 end
 
-execute "apt-get install php-memcache" do
+execute "apt-get install php5-mysqlnd" do
   command "apt-get -y install php5-mysqlnd"
 end
 
-execute "apt-get install php-memcache" do
+execute "apt-get install php5-curl" do
   command "apt-get -y install php5-curl"
 end
 
@@ -58,7 +58,7 @@ execute "apt-get install libapache2-mod-php5" do
   command "apt-get -y install libapache2-mod-php5"
 end
 
-execute "apt-get install libapache2-mod-php5" do
+execute "apt-get install php-pear" do
   command "apt-get -y install php-pear"
 end
 
