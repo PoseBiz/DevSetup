@@ -45,6 +45,14 @@ include_recipe "apache2::default"
        action :update
      end
 
+     php_pear_channel "components.ez.no" do
+       action :discover
+     end
+
+     php_pear_channel "components.ez.no" do
+       action :update
+     end     
+
     # # Pecl Channel
 
      php_pear_channel "pecl.php.net" do

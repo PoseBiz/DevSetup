@@ -17,10 +17,21 @@
 # limitations under the License.
 #
 
+apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
+  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
+  distribution node["lsb"]["codename"]
+  components ["main"]
+  keyserver node["php5_ppa"]["keyserver"]
+  key "E5267A6C"
+  action :add
+  notifies :run, "execute[apt-get update]", :immediately
+end
 
 execute "apt-get update" do
   command "apt-get -y update"
 end
+
+# PHP Commands
 
 execute "apt-get install php5" do
   command "apt-get -y install php5"
@@ -28,6 +39,14 @@ end
 
 execute "apt-get install php5-cgi" do
   command "apt-get -y install php5-cgi"
+end
+
+execute "apt-get install php5-gd" do
+  command "apt-get -y install php5-gd"
+end
+
+execute "apt-get install libpcre3-dev" do
+  command "apt-get -y install libpcre3-dev"
 end
 
 execute "apt-get install php5-fpm" do
@@ -58,16 +77,40 @@ execute "apt-get install libapache2-mod-php5" do
   command "apt-get -y install libapache2-mod-php5"
 end
 
+# Pear Commands
+
 execute "apt-get install php-pear" do
   command "apt-get -y install php-pear"
 end
 
-apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
-  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
-  distribution node["lsb"]["codename"]
-  components ["main"]
-  keyserver node["php5_ppa"]["keyserver"]
-  key "E5267A6C"
-  action :add
-  notifies :run, "execute[apt-get update]", :immediately
+execute "pear update-channels" do
+  command "sudo pear update-channels"
+end
+
+execute "pear upgrade-all" do
+  command "sudo pear upgrade-all"
+end
+
+# XML Commands
+
+execute "apt-get install libxml-libxml-perl" do
+  command "apt-get -y install libxml-libxml-perl"
+end
+
+execute "apt-get install libxml-libxml-perl" do
+  command "apt-get -y install libxml-libxml-perl"
+end
+
+# Misc Commands
+
+execute "apt-get install libcrypt-ssleay-perl" do
+  command "apt-get -y install libcrypt-ssleay-perl"
+end
+
+execute "apt-get install sendmail" do
+  command "apt-get -y install sendmail"
+end
+
+execute "apt-get install openjdk-7-jre-headless" do
+  command "apt-get -y install openjdk-7-jre-headless"
 end
