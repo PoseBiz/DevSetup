@@ -53,20 +53,12 @@ include_recipe "apache2::default"
 
      php_pear_channel "pecl.php.net" do
        action :update
-     end
-
-     php_pear_channel "pecl.php.net" do
-       action :remove
-     end     
+     end  
 
     # # Pear Channel
 
      php_net = php_pear_channel "pear.php.net" do
        action :discover
-     end    
-
-     php_pear_channel "pear.php.net" do
-       action :remove
      end      
 
      php_pear_channel "pear.php.net" do
