@@ -79,11 +79,11 @@ include_recipe "apache2::default"
        not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
      end
 
-     php_pear "Net_URL2" do
-       channel php_net.channel_name
-       version "2.0.0"
-       action :install
-     end
+     # php_pear "Net_URL2" do
+     #   channel php_net.channel_name
+     #   version "2.0.0"
+     #   action :install
+     # end
 
      php_pear "HTTP_Request2" do
        channel php_net.channel_name
