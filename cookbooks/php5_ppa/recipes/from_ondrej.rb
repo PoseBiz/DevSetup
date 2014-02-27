@@ -34,13 +34,33 @@ execute "apt-get install php" do
   command "apt-get -y install php5-fpm"
 end
 
-# execute "apt-get install libapache2-mod-php5filter" do
-#   command "apt-get -y install libapache2-mod-php5filter"
-# end
+execute "apt-get install php-memcache" do
+  command "apt-get -y install php5-memcache"
+end
 
-# execute "apt-get install libapache2-mod-php5" do
-#   command "apt-get -y install libapache2-mod-php5"
-# end
+execute "apt-get install php-memcache" do
+  command "apt-get -y install php-apc"
+end
+
+execute "apt-get install php-memcache" do
+  command "apt-get -y install php5-mysqlnd"
+end
+
+execute "apt-get install php-memcache" do
+  command "apt-get -y install php5-curl"
+end
+
+execute "apt-get install libapache2-mod-php5filter" do
+  command "apt-get -y install libapache2-mod-php5filter"
+end
+
+execute "apt-get install libapache2-mod-php5" do
+  command "apt-get -y install libapache2-mod-php5"
+end
+
+execute "apt-get install libapache2-mod-php5" do
+  command "apt-get -y install php-pear"
+end
 
 apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
   uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"

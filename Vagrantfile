@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "~/Documents/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data' 
+  config.vm.synced_folder "~/Projects/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data' 
   #, :mount_options => ['dmode=775', 'fmode=775']
 
   # Create a private network, which allows host-only access to the machine
@@ -118,9 +118,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.add_recipe "php::module_memcache"
     chef.add_recipe "git"
     chef.add_recipe "vim"    
-    chef.add_recipe "lbbphp"
     chef.add_recipe "php5_ppa"
     chef.add_recipe "php5_ppa::from_ondrej"
+    chef.add_recipe "lbbphp"
     chef.add_recipe "apache2::mod_php5"
     chef.log_level = :debug
 
