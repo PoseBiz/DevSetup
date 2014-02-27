@@ -85,16 +85,16 @@ include_recipe "apache2::default"
      #   action :install
      # end
 
-     php_pear "HTTP_Request2" do
-       channel php_net.channel_name
-       version "2.0.0"
-       action :install
-     end
+     # php_pear "HTTP_Request2" do
+     #   channel php_net.channel_name
+     #   version "2.0.0"
+     #   action :install
+     # end
 
-     php_pear "PHPUnit" do
-       channel php_unit.channel_name
-       action :install
-     end
+     # php_pear "PHPUnit" do
+     #   channel php_unit.channel_name
+     #   action :install
+     # end
 
     web_app "shop.pose.dev" do
       server_admin "ish@pose.com"

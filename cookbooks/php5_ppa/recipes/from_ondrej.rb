@@ -85,6 +85,14 @@ execute "pear install Net_URL2" do
   command "sudo pear install Net_URL2"
 end
 
+execute "pear install HTTP_Request2" do
+  command "sudo pear install HTTP_Request2"
+end
+
+execute "pear install PHPUnit" do
+  command "sudo pear install PHPUnit"
+end
+
 # XML Commands
 
 execute "apt-get install libxml-libxml-perl" do
@@ -109,12 +117,12 @@ execute "apt-get install openjdk-7-jre-headless" do
   command "apt-get -y install openjdk-7-jre-headless"
 end
 
-# apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
-#   uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
-#   distribution node["lsb"]["codename"]
-#   components ["main"]
-#   keyserver node["php5_ppa"]["keyserver"]
-#   key "E5267A6C"
-#   action :add
-#   notifies :run, "execute[apt-get update]", :immediately
-# end
+apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
+  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
+  distribution node["lsb"]["codename"]
+  components ["main"]
+  keyserver node["php5_ppa"]["keyserver"]
+  key "E5267A6C"
+  action :add
+  notifies :run, "execute[apt-get update]", :immediately
+end
