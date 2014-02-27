@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "~/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data' 
+  config.vm.synced_folder "~/Documents/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data' 
   #, :mount_options => ['dmode=775', 'fmode=775']
 
   # Create a private network, which allows host-only access to the machine
@@ -104,23 +104,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "apt"
     chef.add_recipe "openssl"
     chef.add_recipe "apache2"
-#    chef.add_recipe "apache2::mod_rewrite"
-#    chef.add_recipe "apache2::mod_ssl"    
-#    chef.add_recipe "mysql"
-#    chef.add_recipe "mysql::server"
-#    chef.add_recipe "memcached"
-#    chef.add_recipe "cookbook-curl"
-#    chef.add_recipe "php5_ppa"
-#    #chef.add_recipe "php"
-#    #chef.add_recipe "php::module_gd"
-#    #chef.add_recipe "php::module_apc"
-#    #chef.add_recipe "php::module_mysql"
-#    #chef.add_recipe "php::module_curl"
-#    #chef.add_recipe "php::module_memcache"
-#    chef.add_recipe "apache2::mod_php5"
-#    chef.add_recipe "git"
-#    chef.add_recipe "vim"
-#    chef.add_recipe "lbbphp"
+    chef.add_recipe "apache2::mod_rewrite"
+    chef.add_recipe "apache2::mod_ssl"    
+    chef.add_recipe "mysql"
+    chef.add_recipe "mysql::server"
+    chef.add_recipe "memcached"
+    chef.add_recipe "cookbook-curl"
+    # chef.add_recipe "php"
+    # chef.add_recipe "php::module_gd"
+    # chef.add_recipe "php::module_apc"
+    # chef.add_recipe "php::module_mysql"
+    # chef.add_recipe "php::module_curl"
+    # chef.add_recipe "php::module_memcache"
+    chef.add_recipe "git"
+    chef.add_recipe "vim"    
+    chef.add_recipe "lbbphp"
+    chef.add_recipe "php5_ppa"
+    chef.add_recipe "php5_ppa::from_ondrej"
+    chef.add_recipe "apache2::mod_php5"
     chef.log_level = :debug
 
     chef.json = { 
@@ -132,6 +133,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                "server_root_password" => "password",
                "server_repl_password" => "password",
                "server_debian_password" => "password"
+            },
+            "php5_ppa" => {
+              "keyserver" => "keys.gnupg.net"
             }
         }
   end

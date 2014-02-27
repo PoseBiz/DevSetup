@@ -19,9 +19,28 @@
 
 
 execute "apt-get update" do
-  action :nothing
-  command "apt-get update"
+  command "apt-get -y update"
 end
+
+execute "apt-get install php" do
+  command "apt-get -y install php5"
+end
+
+execute "apt-get install php" do
+  command "apt-get -y install php5-cgi"
+end
+
+execute "apt-get install php" do
+  command "apt-get -y install php5-fpm"
+end
+
+# execute "apt-get install libapache2-mod-php5filter" do
+#   command "apt-get -y install libapache2-mod-php5filter"
+# end
+
+# execute "apt-get install libapache2-mod-php5" do
+#   command "apt-get -y install libapache2-mod-php5"
+# end
 
 apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
   uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
