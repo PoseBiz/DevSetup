@@ -11,9 +11,25 @@ git clone https://github.com/PoseBiz/DevSetup.git
 git submodule init
 git submodule update
 
-# 4. Update server_admin email in the apache hosts file setup in lbbphp recipe 
+# 4. Get PHP Code in your git projects foldter
 
-# 5. Start Vagrant
+mkdir Moonbox
+git clone git@github.com:MoonBox/portal.git portal
+
+# 5. Create the Sympony Logs folders in your git root
+
+mkdir symfonycache
+mkdir symfonylog
+
+chmod 777 symfonycache
+chmod 777 symfonylog
+
+# 6.  Update local permissions
+
+cd Moonbox/portal/config
+chmod 775 database.yml
+
+# 7. Start Vagrant
 
 cd DevSetup
 vagrant up
