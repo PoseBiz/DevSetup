@@ -53,7 +53,7 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
        action :update
      end     
 
-    # # Pecl Channel
+    # Pecl Channel
 
      php_pear_channel "pecl.php.net" do
        action :discover
@@ -63,7 +63,7 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
        action :update
      end  
 
-    # # Pear Channel
+    # Pear Channel
 
      php_net = php_pear_channel "pear.php.net" do
        action :discover
@@ -134,5 +134,15 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
     cookbook_file "#{LBB_PROJECT_ROOT}/config/databases.yml" do
       source "databases.yml"
+    end
+
+    # Elastic Search
+
+    cookbook_file "/vagrant" do
+      source "elasticsearch-0.90.7.deb"
+    end
+
+    execute "Install ElasticSearch" do
+      command "sudo dpkg -i /vagrant/elasticsearch-0.90.7.deb"
     end
 
