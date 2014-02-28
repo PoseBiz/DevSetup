@@ -22,6 +22,3 @@
 [submodule "cookbooks/vim"]
 	path = cookbooks/vim
 	url = https://github.com/opscode-cookbooks/vim.git
-[submodule "cookbooks/apache2"]
-	path = cookbooks/apache2
-	url = https://github.com/onehealth-cookbooks/apache2.git
