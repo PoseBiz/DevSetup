@@ -26,6 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "~/Documents/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data'
   #, :mount_options => ['dmode=775', 'fmode=775']
+  config.vm.synced_folder "~/Documents/git/symfonycache", "/home/vagrant/MoonBox/portal/cache", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "~/Documents/git/symfonylog", "/home/vagrant/MoonBox/portal/log", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
