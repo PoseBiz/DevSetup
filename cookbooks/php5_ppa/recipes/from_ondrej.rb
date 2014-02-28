@@ -146,5 +146,5 @@ execute "apt-get install openjdk-7-jre-headless" do
 end
 
 execute "download ElasticSearch" do
-  command "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb | sudo dpkg -i lasticsearch-0.90.7.deb"
+  command "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb | sudo dpkg -i elasticsearch-0.90.7.deb"
 end
