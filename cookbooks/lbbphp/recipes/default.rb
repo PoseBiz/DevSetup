@@ -77,32 +77,47 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
        not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
      end
 
-    web_app "shop.pose.dev" do
-      server_admin "ish@pose.com"
-      server_name "shop.pose.dev"
-      docroot "#{LBB_PROJECT_ROOT}/web"
-      docmainroot "#{LBB_PROJECT_ROOT}"
-      server_port "80"
-      server_ssl_port "443"
-      server_prefix "shop.pose"
-      server_suffix ".dev"
-      ssl_crt "shop.pose.dev.crt"
-      ssl_key "shop.pose.dev.key"
+    template "shop.pose.dev.conf" do
+      source "shop.pose.dev.conf.erb"
+      path "/etc/apache2/sites-available/shop.pose.dev.conf"
+      variables(:params => {:server_admin=>"ish@pose.com",
+        :server_name => "shop.pose.dev",
+        :docroot => "#{LBB_PROJECT_ROOT}/web",
+        :docmainroot => "#{LBB_PROJECT_ROOT}",
+        :server_port => "80",
+        :server_ssl_port => "443",
+        :server_prefix => "shop.pose",
+        :server_suffix => ".dev",
+        :ssl_crt => "shop.pose.dev.crt",
+        :ssl_key => "shop.pose.dev.key"})
     end
 
-    web_app "admin.pose.dev" do
-      template "web_app_admin.conf.erb"
-      server_admin "ish@pose.com"
-      server_name "admin.pose.dev"
-      docroot "#{LBB_PROJECT_ROOT}/web_admin"
-      docmainroot "#{LBB_PROJECT_ROOT}"
-      server_port "80"
-      server_ssl_port "443"
-      server_prefix "shop.pose"
-      server_suffix ".dev"
-      ssl_crt "shop.pose.dev.crt"
-      ssl_key "shop.pose.dev.key"
+    template "admin.pose.dev.conf" do
+      source "admin.pose.dev.conf.erb"
+      path "/etc/apache2/sites-available/admin.pose.dev.conf"
+      variables(:params => {:server_admin => "ish@pose.com",
+        :server_name => "admin.pose.dev",
+        :docroot => "#{LBB_PROJECT_ROOT}/web_admin",
+        :docmainroot => "#{LBB_PROJECT_ROOT}",
+        :server_port => "80",
+        :server_ssl_port => "443",
+        :server_prefix => "shop.pose",
+        :server_suffix => ".dev",
+        :ssl_crt => "shop.pose.dev.crt",
+        :ssl_key => "shop.pose.dev.key"})
     end
+
+    # PHP INIs
+
+    cookbook_file "/etc/php5/apache2/php.ini" do
+      source "apache2/php.ini"
+    end
+
+    cookbook_file "/etc/php5/cli/php.ini" do
+      source "cli/php.ini"
+    end    
+
+    # Apache Files
 
     directory "/etc/apache2/ssl" do
       action :create
@@ -134,13 +149,22 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
       source "databases.yml"
     end
 
+    execute "a2enmod rewrite" do
+      command "a2enmod rewrite"
+    end
+
+    execute "a2enmod ssl" do
+      command "a2enmod ssl"
+    end
+
     # Elastic Search
 
-    cookbook_file "/vagrant" do
-      source "elasticsearch-0.90.7.deb"
+    remote_file "/vagrant/elasticsearch-0.90.7.deb" do
+      source "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb"
+      action :create_if_missing
     end
 
     execute "Install ElasticSearch" do
       command "sudo dpkg -i /vagrant/elasticsearch-0.90.7.deb"
-    end
+    end    
 

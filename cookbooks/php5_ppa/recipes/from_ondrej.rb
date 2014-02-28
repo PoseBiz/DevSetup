@@ -41,14 +41,6 @@ execute "apt-get install apache2" do
   command "apt-get -y install apache2"
 end
 
-execute "a2enmod rewrite" do
-  command "a2enmod rewrite"
-end
-
-execute "a2enmod ssl" do
-  command "a2enmod ssl"
-end
-
 execute "apt-get install libapache2-mod-php5filter" do
   command "apt-get -y install libapache2-mod-php5filter"
 end
