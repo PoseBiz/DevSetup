@@ -110,15 +110,15 @@ execute "pear upgrade-all" do
 end
 
 execute "pear install Net_URL2" do
-  command "sudo pear install Net_URL2"
+  command "sudo pear install -f Net_URL2"
 end
 
 execute "pear install HTTP_Request2" do
-  command "sudo pear install HTTP_Request2"
+  command "sudo pear install -f HTTP_Request2"
 end
 
 execute "pear install PHPUnit" do
-  command "sudo pear install PHPUnit"
+  command "sudo pear install -f PHPUnit"
 end
 
 # XML Commands
