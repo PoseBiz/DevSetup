@@ -163,7 +163,11 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
     execute "a2ensite admin.pose.dev.conf" do
       command "a2ensite admin.pose.dev.conf"
-    end     
+    end    
+
+    execute "apache2ctl restart" do
+      command "apache2ctl restart"
+    end
 
     # Elastic Search
 
