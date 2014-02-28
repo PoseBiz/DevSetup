@@ -19,8 +19,6 @@
 
 LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
-#include_recipe "apache2::default"
-
     php_unit = php_pear_channel "pear.phpunit.de" do
       action :discover
     end
