@@ -79,23 +79,6 @@ include_recipe "apache2::default"
        not_if { Gem::Version.new(cur_version) > Gem::Version.new('1.9.0') }
      end
 
-     # php_pear "Net_URL2" do
-     #   channel php_net.channel_name
-     #   version "2.0.0"
-     #   action :install
-     # end
-
-     # php_pear "HTTP_Request2" do
-     #   channel php_net.channel_name
-     #   version "2.0.0"
-     #   action :install
-     # end
-
-     # php_pear "PHPUnit" do
-     #   channel php_unit.channel_name
-     #   action :install
-     # end
-
     web_app "shop.pose.dev" do
       server_admin "ish@pose.com"
       server_name "shop.pose.dev"
@@ -152,19 +135,4 @@ include_recipe "apache2::default"
     cookbook_file "#{LBB_PROJECT_ROOT}/config/databases.yml" do
       source "databases.yml"
     end
-    
-    # execute "initialize LBB dev database" do
-    #   command "mysql -u root --password=password -e 'DROP DATABASE IF EXISTS lbb; CREATE DATABASE IF NOT EXISTS lbb;'"
-    # end
-
-    # execute "initialize LBB test database" do
-    #   command "mysql -u root --password=password -e 'DROP DATABASE IF EXISTS lbb_test; CREATE DATABASE IF NOT EXISTS lbb_test'"
-    # end
-
-    # %w(model sql).each do |phase|
-    #   execute "./symfony doctrine:build-#{phase}" do
-    #     cwd LBB_PROJECT_ROOT
-    #   end
-    # end
-
 

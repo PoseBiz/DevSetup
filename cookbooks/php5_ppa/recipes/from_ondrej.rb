@@ -17,8 +17,28 @@
 # limitations under the License.
 #
 
+apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
+  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
+  distribution node["lsb"]["codename"]
+  components ["main"]
+  keyserver node["php5_ppa"]["keyserver"]
+  key "E5267A6C"
+  action :add
+  notifies :run, "execute[apt-get update]", :immediately
+end
+
 execute "apt-get update" do
   command "apt-get -y update"
+end
+
+# Apache2 Commands
+
+execute "apt-get install libapache2-mod-php5filter" do
+  command "apt-get -y install libapache2-mod-php5filter"
+end
+
+execute "apt-get install libapache2-mod-php5" do
+  command "apt-get -y install libapache2-mod-php5"
 end
 
 # PHP Commands
@@ -59,15 +79,7 @@ execute "apt-get install php5-curl" do
   command "apt-get -y install php5-curl"
 end
 
-execute "apt-get install libapache2-mod-php5filter" do
-  command "apt-get -y install libapache2-mod-php5filter"
-end
-
-execute "apt-get install libapache2-mod-php5" do
-  command "apt-get -y install libapache2-mod-php5"
-end
-
-# Pear Commands
+# # Pear Commands
 
 execute "apt-get install php-pear" do
   command "apt-get -y install php-pear"
@@ -93,7 +105,7 @@ execute "pear install PHPUnit" do
   command "sudo pear install PHPUnit"
 end
 
-# XML Commands
+XML Commands
 
 execute "apt-get install libxml-libxml-perl" do
   command "apt-get -y install libxml-libxml-perl"
@@ -115,14 +127,4 @@ end
 
 execute "apt-get install openjdk-7-jre-headless" do
   command "apt-get -y install openjdk-7-jre-headless"
-end
-
-apt_repository "ondrej-php-#{node["lsb"]["codename"]}" do
-  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
-  distribution node["lsb"]["codename"]
-  components ["main"]
-  keyserver node["php5_ppa"]["keyserver"]
-  key "E5267A6C"
-  action :add
-  notifies :run, "execute[apt-get update]", :immediately
 end
