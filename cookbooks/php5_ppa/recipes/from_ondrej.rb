@@ -41,6 +41,10 @@ execute "apt-get install libapache2-mod-php5" do
   command "apt-get -y install libapache2-mod-php5"
 end
 
+execute "apt-get install apache2.2-common" do
+  command "apt-get -y install apache2.2-common"
+end
+
 # PHP Commands
 
 execute "apt-get install php5" do
