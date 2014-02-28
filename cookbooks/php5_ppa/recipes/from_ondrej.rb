@@ -33,16 +33,28 @@ end
 
 # Apache2 Commands
 
+execute "apt-get purge apache2" do
+  command "apt-get -y purge apache2 apache2-utils apache2.2-bin apache2-common"
+end
+
+execute "apt-get install apache2" do
+  command "apt-get -y install apache2"
+end
+
+execute "a2enmod rewrite" do
+  command "a2enmod rewrite"
+end
+
+execute "a2enmod ssl" do
+  command "a2enmod ssl"
+end
+
 execute "apt-get install libapache2-mod-php5filter" do
   command "apt-get -y install libapache2-mod-php5filter"
 end
 
 execute "apt-get install libapache2-mod-php5" do
   command "apt-get -y install libapache2-mod-php5"
-end
-
-execute "apt-get install apache2.2-common" do
-  command "apt-get -y install apache2.2-common"
 end
 
 # PHP Commands
@@ -131,4 +143,12 @@ end
 
 execute "apt-get install openjdk-7-jre-headless" do
   command "apt-get -y install openjdk-7-jre-headless"
+end
+
+execute "download ElasticSearch" do
+  command "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb"
+end
+
+execute "install ElasticSearch" do
+  command "sudo dpkg -i lasticsearch-0.90.7.deb"
 end
