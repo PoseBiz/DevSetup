@@ -103,9 +103,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.add_recipe "apt"
     chef.add_recipe "openssl"
-    chef.add_recipe "apache2"
-    chef.add_recipe "apache2::mod_rewrite"
-    chef.add_recipe "apache2::mod_ssl"
     chef.add_recipe "mysql"
     chef.add_recipe "mysql::server"
     chef.add_recipe "memcached"
