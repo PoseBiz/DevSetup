@@ -79,7 +79,7 @@ execute "apt-get install php5-curl" do
   command "apt-get -y install php5-curl"
 end
 
-# # Pear Commands
+# Pear Commands
 
 execute "apt-get install php-pear" do
   command "apt-get -y install php-pear"
@@ -105,7 +105,7 @@ execute "pear install PHPUnit" do
   command "sudo pear install PHPUnit"
 end
 
-XML Commands
+# XML Commands
 
 execute "apt-get install libxml-libxml-perl" do
   command "apt-get -y install libxml-libxml-perl"
