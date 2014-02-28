@@ -5,7 +5,7 @@
   <Directory  <%= @params[:docroot] %>>
     Options FollowSymLinks ExecCGI
     AllowOverride None
-    Allow from All
+    Require all granted
 
     # former symfony .htaccess
     RewriteEngine On
@@ -21,7 +21,7 @@
   <Directory "<%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf">
 
     AllowOverride None
-    Allow from All
+    Require all granted
     
   </Directory>
  
@@ -49,7 +49,7 @@
   <Directory <%= @params[:docroot] %>>
     Options FollowSymLinks ExecCGI
     AllowOverride None
-    Allow from All
+    Require all granted
 
     # former symfony .htaccess
     RewriteEngine On
@@ -65,7 +65,7 @@
   <Directory "<%= @params[:docmainroot] %>/lib/vendor/symfony/data/web/sf">
     
     AllowOverride None
-    Allow from All
+    Require all granted
     
   </Directory>
 

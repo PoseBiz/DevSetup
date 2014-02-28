@@ -157,6 +157,14 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
       command "a2enmod ssl"
     end
 
+    execute "a2ensite shop.pose.dev.conf" do
+      command "a2ensite shop.pose.dev.conf"
+    end   
+
+    execute "a2ensite admin.pose.dev.conf" do
+      command "a2ensite admin.pose.dev.conf"
+    end     
+
     # Elastic Search
 
     remote_file "/vagrant/elasticsearch-0.90.7.deb" do
