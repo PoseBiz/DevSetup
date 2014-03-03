@@ -180,19 +180,7 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
       command "sudo dpkg -i /vagrant/elasticsearch-0.90.7.deb"
     end
     
-    cookbook_file "/vagrant/lbb_mysql_data.sh" do
-      source "lbb_mysql_data.sh"
-    end
-    
-    execute "add lbb mysql data" do
-      command "./lbb_mysql_data.sh"
-    end
-    
-    execute "rebuild product search index" do
-      command "./MoonBox/portal/symfony cc"
-    end
-    
-    execute "rebuild product search index" do
-      command "./MoonBox/portal/symfony lbb:updateProductIndex --rebuild=1"
-    end     
+#    execute "rebuild product search index" do
+#      command "./MoonBox/portal/symfony lbb:updateProductIndex --rebuild=1"
+#    end     
 
