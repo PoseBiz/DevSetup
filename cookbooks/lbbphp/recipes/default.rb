@@ -178,5 +178,9 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
     execute "Install ElasticSearch" do
       command "sudo dpkg -i /vagrant/elasticsearch-0.90.7.deb"
-    end    
+    end
+    
+    execute "add lbb mysql data" do
+      command "./lbb_mysql_data.sh"
+    end     
 
