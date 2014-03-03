@@ -27,10 +27,20 @@ chmod 777 symfonylog
 # 6.  Update local permissions
 
 cd Moonbox/portal/config
-chmod 775 database.yml
+sudo chmod 775 databases.yml
 
 # 7. Start Vagrant
 
 cd DevSetup
 vagrant up
 
+#8. update databases.yml file, change localhost to 10.0.2.2, db name to pose_development and remove password
+
+#9. add host forwarding in pow
+
+echo 8080 > ~/.pow/shop.pose
+
+#10. clear symfony cache
+vagrant ssh
+cd Moonbox/portal
+./symfony cc
