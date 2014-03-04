@@ -5,8 +5,6 @@ mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/account_cancel_reason.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/bag_allocation_settings.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/call_center_reasons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/categories.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/category.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_constraint_type.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_discount_types.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_templates.sql
