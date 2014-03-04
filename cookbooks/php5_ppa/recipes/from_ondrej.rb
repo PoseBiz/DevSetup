@@ -89,29 +89,29 @@ end
 
 # Pear Commands
 
-# execute "apt-get install php-pear" do
-#   command "apt-get -y install php-pear"
-# end
+execute "apt-get install php-pear" do
+  command "apt-get -y install php-pear"
+end
 
-# execute "pear update-channels" do
-#   command "sudo pear update-channels"
-# end
+execute "pear update-channels" do
+  command "sudo pear update-channels"
+end
 
-# execute "pear upgrade-all" do
-#   command "sudo pear upgrade-all"
-# end
+execute "pear upgrade-all" do
+  command "sudo pear upgrade-all"
+end
 
-# execute "pear install Net_URL2" do
-#   command "sudo pear install -f Net_URL2"
-# end
+execute "pear install Net_URL2" do
+  command "sudo pear install -f Net_URL2"
+end
 
-# execute "pear install HTTP_Request2" do
-#   command "sudo pear install -f HTTP_Request2"
-# end
+execute "pear install HTTP_Request2" do
+  command "sudo pear install -f HTTP_Request2"
+end
 
-# execute "pear install PHPUnit" do
-#   command "sudo pear install -f PHPUnit"
-# end
+execute "pear install PHPUnit" do
+  command "sudo pear install -f PHPUnit"
+end
 
 # XML Commands
 

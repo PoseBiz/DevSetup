@@ -2,14 +2,14 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:    mysql:host=localhost;dbname=pose
+      dsn:    mysql:host=10.0.2.2;dbname=pose_development
       username: root
-      password: password
+      password: 
 
 readonly:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:    mysql:host=localhost;dbname=pose
+      dsn:    mysql:host=10.0.2.2;dbname=pose_development
       username: root
-      password: password
+      password: 
