@@ -1,3 +1,5 @@
+# !!!! INSTALL Rails Project First
+
 # 1. Install Vagrant
 
 # http://docs.vagrantup.com/v2/installation/
@@ -44,3 +46,7 @@ echo 8080 > ~/.pow/shop.pose
 vagrant ssh
 cd Moonbox/portal
 ./symfony cc
+
+
+#11. build product index
+./symfony lbb:updateProductIndex --rebuild=1
