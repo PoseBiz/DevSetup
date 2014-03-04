@@ -116,8 +116,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "lbbphp"
     chef.log_level = :debug
 
-    config.vm.provision "shell", path: "lbb_mysql_data.sh"
-
     chef.json = { 
             "apache" => {
                 "default_site_enabled" => false,
@@ -133,6 +131,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             }
         }
   end
+  
+  config.vm.provision "shell", path: "lbb_mysql_data.sh"
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
