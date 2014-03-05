@@ -79,3 +79,7 @@ telnet localhost 11211
 flush_all
 quit
 
+#15. run php autopilot
+cd MoonBox/portal
+./symfony lbb:autopilot
+
