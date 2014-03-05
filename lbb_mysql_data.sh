@@ -1,3 +1,6 @@
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/kusers.sql
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/pose_users.sql
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/bots.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/categories.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/brands.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/products.sql
