@@ -42,11 +42,7 @@ vagrant up
 
 192.168.128.128 shop.pose.dev
 
-#10. Append guest/vagrant '/etc/hosts' with:
-10.0.2.2 pose.dev
-127.0.0.1 shop.pose.dev
-
-#11. Update portal/lib/OldSymonyConfigs.php 
+#10. Update portal/lib/OldSymonyConfigs.php 
 
 > 'release_dev_user' => 'someuser', 
 
@@ -62,16 +58,16 @@ update to turn error emails on and send them to yourself
 e.g.  'app_email_debug_errors_enabled' => true,
       'app_email_debug_errors_target' => 'thomas@pose.com',
 
-#12. Setup dynamoDb tables
+#11. Setup dynamoDb tables
 
 in portal, run ./symfony lbb:setupUserDynamoDb --devuser=[user set in release_dev_user]
 
 e.g. ./symfony lbb:setupUserDynamoDb --devuser=tleblan
 
-#13. build product index
+#12. build product index
 ./symfony lbb:updateProductIndex --rebuild=1
 
-#14. clear symfony cache and memcache
+#13. clear symfony cache and memcache
 vagrant ssh
 cd Moonbox/portal
 ./symfony cc
@@ -79,7 +75,7 @@ telnet localhost 11211
 flush_all
 quit
 
-#15. run php autopilot
+#14. run php autopilot
 cd MoonBox/portal
 ./symfony lbb:autopilot
 
