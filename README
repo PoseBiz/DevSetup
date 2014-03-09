@@ -4,7 +4,7 @@
 
 # http://docs.vagrantup.com/v2/installation/
 
-# 2. Setup DevSetup repo
+# 2. Setup DevSetup repo on local ~/Documents/git
 
 git clone https://github.com/PoseBiz/DevSetup.git
 
@@ -13,12 +13,12 @@ git clone https://github.com/PoseBiz/DevSetup.git
 git submodule init
 git submodule update
 
-# 4. Get PHP Code in your git projects foldter
+# 4. Get PHP Code in your git projects folder (~/Documents/git/)
 
 mkdir Moonbox
 git clone git@github.com:MoonBox/portal.git portal
 
-# 5. Create the Sympony Logs folders in your git root
+# 5. Create the Sympony Logs folders in your git root (~/Documents/git)
 
 mkdir symfonycache
 mkdir symfonylog
@@ -33,20 +33,49 @@ sudo chmod 775 databases.yml
 
 # 7. Start Vagrant
 
-cd DevSetup
+cd ~/Documents/git/DevSetup
 vagrant up
 
 #8. update databases.yml file, change localhost to 10.0.2.2, db name to pose_development and remove password
 
-#9. Append '/etc/hosts' with:
+#9. Append local '/etc/hosts' with:
 
 192.168.128.128 shop.pose.dev
 
-#10. clear symfony cache
+#10. Update portal/lib/OldSymonyConfigs.php 
+
+> 'release_dev_user' => 'someuser', 
+
+replace 'someuser' with your dynamodb username (pick whichever you want but re-use for dynamoDb setup task below)
+
+e.g. 'release_dev_user' => 'tleblan',
+
+> 'app_email_debug_errors_enabled' => false,
+
+> 'app_email_debug_errors_target' => 'engineering@pose.com',
+
+update to turn error emails on and send them to yourself
+e.g.  'app_email_debug_errors_enabled' => true,
+      'app_email_debug_errors_target' => 'thomas@pose.com',
+
+#11. Setup dynamoDb tables
+
+in portal, run ./symfony lbb:setupUserDynamoDb --devuser=[user set in release_dev_user]
+
+e.g. ./symfony lbb:setupUserDynamoDb --devuser=tleblan
+
+#12. build product index
+./symfony lbb:updateProductIndex --rebuild=1
+
+#13. clear symfony cache and memcache
 vagrant ssh
 cd Moonbox/portal
 ./symfony cc
+telnet localhost 11211
+flush_all
+quit
 
+#14. run php autopilot
+cd MoonBox/portal
+./symfony lbb:autopilot
 
-#11. build product index
-./symfony lbb:updateProductIndex --rebuild=1
