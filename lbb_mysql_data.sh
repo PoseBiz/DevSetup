@@ -26,3 +26,4 @@ mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/swatches.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/stock.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/trade_period.sql
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/marketplace_seller_info.sql
