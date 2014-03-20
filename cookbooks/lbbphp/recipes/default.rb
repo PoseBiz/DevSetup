@@ -179,6 +179,17 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
     execute "Install ElasticSearch" do
       command "sudo dpkg -i /vagrant/elasticsearch-0.90.7.deb"
     end
+
+    # Addional Steps
+
+    execute "Add 10.0.2.2 pose.dev" do
+      command "echo '10.0.2.2 pose.dev' | sudo tee -a /etc/hosts"
+    end
+
+    execute "Add 127.0.0.1 shop.pose.dev" do
+      command "echo '127.0.0.1 shop.pose.dev' | sudo tee -a /etc/hosts"
+    end    
+
     
 #    execute "rebuild product search index" do
 #      command "./MoonBox/portal/symfony lbb:updateProductIndex --rebuild=1"
