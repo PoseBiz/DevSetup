@@ -22,3 +22,6 @@
 [submodule "cookbooks/vim"]
 	path = cookbooks/vim
 	url = https://github.com/opscode-cookbooks/vim.git
+[submodule "cookbooks/nfs"]
+	path = cookbooks/nfs
+	url = http://github.com/atomic-penguin/cookbook-nfs

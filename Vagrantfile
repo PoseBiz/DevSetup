@@ -24,10 +24,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.synced_folder "~/Documents/git/MoonBox", "/home/vagrant/MoonBox", :owner=> 'vagrant', :group=>'www-data'
-  #, :mount_options => ['dmode=775', 'fmode=775']
-  config.vm.synced_folder "~/Documents/git/symfonycache", "/home/vagrant/MoonBox/portal/cache", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
-  config.vm.synced_folder "~/Documents/git/symfonylog", "/home/vagrant/MoonBox/portal/log", :owner=> 'vagrant', :group=>'www-data', :mount_options => ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "~/git/MoonBox", "/home/vagrant/MoonBox", :nfs => true 
+  #:owner=> 'vagrant', :group=>'www-data' #, :mount_options => ['dmode=775', 'fmode=775']
+  config.vm.synced_folder "~/git/symfonycache", "/home/vagrant/MoonBox/portal/cache", :nfs => true
+  #, :mount_options => ['dmode=777', 'fmode=777'], :owner => 'vagrant', :group => 'www-data'
+  config.vm.synced_folder "~/git/symfonylog", "/home/vagrant/MoonBox/portal/log", :nfs => true
+  #, :mount_options => ['dmode=777', 'fmode=777'], :owner => 'vagrant', :group => 'www-data'
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -57,7 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #vb.gui = true
   
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -104,6 +106,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "chef_solo" do |chef|
 
     chef.add_recipe "apt"
+    chef.add_recipe "nfs"
     chef.add_recipe "openssl"
     chef.add_recipe "mysql"
     chef.add_recipe "mysql::server"
