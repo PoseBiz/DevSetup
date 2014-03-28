@@ -25,17 +25,6 @@
     
   </Directory>
  
-  RewriteEngine On
-  RewriteCond %{HTTP_HOST} !^<%= @params[:server_prefix] %><%= @params[:server_suffix] %>$
-  RewriteRule ^(.*)$ http://<%= @params[:server_name] %>/$1 [R=permanent,L]
-  RewriteCond %{SCRIPT_FILENAME} !-d
-  RewriteRule ^\/m(\/?|\/.+)$ /mobileweb$1 [NC]
-  RewriteCond %{SCRIPT_FILENAME} !-d
-  RewriteRule ^\/(frontend|mobileweb|api)(\/?|\/.*)$ /$1.php$2 [NC,L]
-  RewriteCond %{SCRIPT_FILENAME} !-d
-  RewriteRule ^\/(robots).txt$ /$1 [NC,L]
-  RewriteRule ^\/landing$ / [R=permanent,L]
- 
   ErrorLog /var/log/apache2/error.log
   CustomLog /var/log/apache2/access.log combined
 </VirtualHost>
