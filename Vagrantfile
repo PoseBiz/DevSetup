@@ -159,6 +159,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
+  
+  # Set the Timezone to host timezone 
+  require 'time' 
+  offset = ((Time.zone_offset(Time.now.zone)/60)/60) 
+  zone_suffix = offset >= 0 ? "+#{offset.to_s}" : "#{offset.to_s}" 
+  timezone = 'Etc/GMT' + zone_suffix 
+  config.vm.provision :shell, :inline => "echo \"#{timezone}\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
 end
 
 
