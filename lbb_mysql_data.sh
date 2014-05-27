@@ -1,31 +1,5 @@
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/abtest.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/abtestgroups.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/kusers.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/pose_users.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/bots.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/categories.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/brands.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/products.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/product_images.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/account_cancel_reason.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/bag_allocation_settings.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/call_center_reasons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_constraint_type.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_discount_types.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/coupon_templates.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/disable_reasons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/hold_bag_reasons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/marketplace_fees.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/referrals.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/retail_price_score.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/rollover_reasons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/settings.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/shipping_type.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/stylist_type.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/tax_rates.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/test_coupons.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/condition.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/swatches.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/stock.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/trade_period.sql
-mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/marketplace_seller_info.sql
+for file in /home/vagrant/MoonBox/portal/data/sql/*.sql
+do
+  echo "importing $file"
+  mysql -h10.0.2.2 -uroot pose_development < $file
+done
