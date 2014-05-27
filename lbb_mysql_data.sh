@@ -1,3 +1,5 @@
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/abtest.sql
+mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/abtestgroups.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/kusers.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/pose_users.sql
 mysql -h10.0.2.2 -uroot pose_development < /home/vagrant/MoonBox/portal/data/sql/bots.sql
