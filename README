@@ -69,11 +69,8 @@ e.g. ./symfony lbb:setupUserDynamoDb --devuser=tleblan
 
 #13. clear symfony cache and memcache
 vagrant ssh
-cd Moonbox/portal
-./symfony cc
-telnet localhost 11211
-flush_all
-quit
+cd MoonBox/portal
+bash clearcaches.sh
 
 #14. run php autopilot
 cd MoonBox/portal
