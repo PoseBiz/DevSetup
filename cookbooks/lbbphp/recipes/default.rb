@@ -63,7 +63,7 @@ LBB_PROJECT_ROOT = "/home/vagrant/MoonBox/portal"
 
     # Pear Channel
 
-     php_net = php_pear_channel "pear.php.net" do
+     php_pear_channel "pear.php.net" do
        action :discover
      end      
 
